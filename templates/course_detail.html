@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+
+    <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+        <h5 class="card-title">{{ course.title }}</h5>
+        <p class="card-text">{{ course.description }}</p>
+
+        <hr>
+
+        {% if not enrolled %}
+        <form action="{% url 'enroll' course.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-outline-success">Enroll Now</button>
+        </form>
+
+        {% else %}
+
+        {% for video in course.videos.all %}
+        <div>
+            <h4>{{ video.title }}</h4>
+            <video style="height: 100%; width: 100%;" controls>
+                <source src="{{ video.file.url }}" type="video/mp4">
+            </video>
+        </div>
+        {% empty %}
+        <p>No videos added</p>
+        {% endfor %}
+        
+        <h2>Quiz section</h2>
+        {% for quiz in course.quizzes.all %}
+        <p>
+            <a href="">{{ quiz.question }}</a>
+        </p>
+        {% empty %}
+        <p>No quizzes available</p>
+        {% endfor %}
+
+        {% endif %}
+
+
+
+
+
+    </div>
+
+      
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+{% endblock content %}

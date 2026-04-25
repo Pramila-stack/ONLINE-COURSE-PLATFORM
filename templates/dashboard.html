@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% for enrollment in enrollments %}
+
+<li>
+    <h1>{{ enrollment.course.title }}</h1>
+    
+</li>
+<p>
+    <a href="" class="btn btn-outline-primary">View Detail</a>
+</p>
+
+
+{% endfor%}
+
+
+
+{% endfor %}
+
+
+
+{% endblock content %}
