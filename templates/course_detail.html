@@ -34,7 +34,7 @@
         <h2>Quiz section</h2>
         {% for quiz in course.quizzes.all %}
         <p>
-            <a href="">{{ quiz.question }}</a>
+            <a href="{% url 'quiz' course.pk quiz.pk %}">{{ quiz.question }}</a>
         </p>
         {% empty %}
         <p>No quizzes available</p>

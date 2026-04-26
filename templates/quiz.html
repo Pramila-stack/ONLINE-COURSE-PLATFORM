@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-primary mt-2">Submit Answer</button>
+    </form>
+
+    {% if correct is not None %}
+        {% if correct %}
+            <p style="color: green;">Correct Answer</p>
+        {% else %}
+            <p style="color: red;">Wrong Answer</p>
+            <p>The correct answer is:
+                {% if quiz.correct_option == 1 %}{{ quiz.option1 }}
+                {% elif quiz.correct_option == 2 %}{{ quiz.option2 }}
+                {% elif quiz.correct_option == 3 %}{{ quiz.option3 }}
+                {% elif quiz.correct_option == 4 %}{{ quiz.option4 }}
+                {% endif %}
+            </p>
+        {% endif %}
+    {% endif %}
+
+    <div class="mt-3">
+        {% if next_quiz %}
+            <a href="{% url 'quiz' course_pk next_quiz.pk %}">Next Quiz</a>
+        {% else %}
+            <a href="{% url 'course-list' %}">Back to Course</a>
+        {% endif %}
+    </div>
+
+
+
+
+
+</div>
+
+
+{% endblock content %}

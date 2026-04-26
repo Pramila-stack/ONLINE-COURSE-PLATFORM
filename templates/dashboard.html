@@ -4,19 +4,22 @@
 {% for enrollment in enrollments %}
 
 <li>
-    <h1>{{ enrollment.course.title }}</h1>
+    <h2>{{ enrollment.course.title }}</h2>
     
 </li>
 <p>
-    <a href="" class="btn btn-outline-primary">View Detail</a>
+    <a href="{% url 'course-detail' enrollment.course.pk %}" class="btn btn-outline-primary">View Detail</a>
+
+    <form action="{% url 'noenroll' enrollment.course.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Remove</button>
+    </form>
 </p>
-
-
-{% endfor%}
-
-
-
+{% empty %}
+<p>No enrollments yet.</p>
 {% endfor %}
+
+
 
 
 
